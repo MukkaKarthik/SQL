@@ -1,0 +1,452 @@
+Open the following URL to execute commands :-
+
+https://www.w3schools.com/sql/trysql.asp?filename=trysql_asc
+
+
+--SELECT distinct COUNTRY FROM [Customers];//mix
+--SELECT DISTINCT POSTALCODE FROM CUSTOMERS;//complete upper case
+--select distinct country from customers;//complete lower case
+
+--select ContactName from Customers;
+
+--select * from Customers where Country='Germany';
+--select * from Customers where CustomerID=86;
+
+
+
+
+--SELECT * FROM [Customers]
+
+--Using relational operators in where clause condition :-
+--select * from Customers where CustomerID>1 and CustomerID<10;
+
+--select * from Customers where CustomerID <>1 ;
+--select * from Customers where CustomerID>=1 and CustomerID<=10;
+
+select * from Customers where ContactName = 'Thomas Hardy';
+
+
+
+
+--Using Logical operators
+
+--select CustomerName,ContactName,Address,Country from Customers where Country='Germany' or Country = 'Mexico';
+--select CustomerName,ContactName,Address,Country from Customers where Country='Germany' and ContactName = 'Hanna Moos';
+
+select CustomerID,CustomerName,ContactName,Country from Customers where Country='Germany' and CustomerID >= 1 and CustomerID < 15 and CustomerName <>'Blauer See Delikatessen';
+
+--select * from Customers where Country = 'Germany' or Country = 'Mexico' and CustomerID > 50;
+--select * from Customers where Country = 'Germany' and CustomerID > 50;
+
+--select * from Customers where Country = 'Germany'
+select * from Customers where Country <> 'Germany' and City = 'Paris';
+
+
+
+
+
+--SELECT * FROM [Products] where Price between 20 and 40;
+--this includes 20 and 40 as well
+--select * from Products where Price>=20 and Price<=40;
+--above 2 statements yield same result 
+
+
+--SELECT * FROM [Products] where Price not between 20 and 40;
+select * from Products where Price<20 or Price>40;
+above 2 statements yield same result 
+
+
+
+
+
+--select Country from Customers order by Country asc;
+--select * from Customers order by Country asc;//asc is optional , if we don't use asc keyword , when order by command is used , system will automatically sort the data in ascending order 
+
+--select * from Customers order by Country
+--select * from Customers order by Country desc
+
+--sorting data on multiple columns 
+--select * from Customers order by Country desc,City desc//sorting Country in descending order then sorting city in descending order 
+
+--select * from Customers order by Country asc,City desc;//sorting Country in ascending order then sorting city in descending order 
+
+select * from Customers order by Country desc,City desc,CustomerID asc;
+
+--select * from Products order by Price;//asc word is optional , by default it takes sorting in ascending order
+select * from Products order by Price desc;//desc word in mandatory , by default it takes sorting in ascending order
+
+
+
+
+
+--select * from Customers where Country like '%a';//represents any country that ends with a
+--select * from Customers where Country like 'f%';//represents any country that starts with f and ends with anything 
+--select * from Customers where Country like 's%n';//represents any country that starts with s and ends with n 
+--select * from Customers where Country like 'mex%';
+--select * from Customers where Country like '%anc%';
+--select * from Customers where Country like '%can%';//% represents 0 or any number of characters , can be at the starting/ending/anywhere in between  
+--select * from Customers where Country like '_weden';//consider _ as fill in the blank which could be any letter 
+--select * from Customers where Country like 'u_';//consider _ as fill in the blank which could be any letter,any letter after u should come and words which has only 2 letters should come
+--select * from Customers where Country like '_s_';
+--select * from Customers where Country like 'M_x_';//can't display the result because this stands for 4 letter word which is not present in Customers table 
+
+--select * from Customers where Country like 'M_x_%';
+
+
+
+
+
+
+
+--select CategoryName as Category_alias,description as description_alias from categories;
+--select CategoryName as Category alias,description as description alias from categories;//will throw an error as aliases accept single word , not multiple words , 
+
+--to overcome this use square brackets []
+
+select CategoryName as [Category alias],description as [description alias] from categories;
+
+
+
+
+
+
+--select * from Customers limit 30;//although table has 91 records we are limiting data to be displaed as 30 records only 
+--select * from Customers where Country = 'UK' limit 3; 
+select * from Customers limit 3,10;//display 10 records after 3 number from Customer ID
+
+
+
+
+
+
+
+
+SELECT upper(Country) as [Country Alias given],
+upper(CustomerName) as [CustomerName Alias given],
+upper(ContactName) as [ContactName Alias given],
+city 
+FROM [Customers]
+
+
+--SELECT lower('MINDTREE DEVELOPER');
+select lower(Country) as [Country Alias given],lower(CustomerName) as [CustomerName Alias given],lower(ContactName) as [ContactName Alias given] from Customers; 
+
+
+
+
+
+
+
+
+
+--select length('Mindtree');
+--select length('Developer');
+--select length('Mindtree Developer');//includes space as well
+
+SELECT CustomerName,length(CustomerName) as [Applying Length function = CustomerName],
+ContactName,length(ContactName) as [Applying Length function = ContactName],
+Address,length(Address) as [Applying Length function = Address],
+Country,length(Country) as [Applying Length function = Country] 
+
+FROM [Customers]
+
+
+select * from Customers where length(Country)>10; 
+
+
+
+
+
+
+
+--select substr('Mindtree',2);//indtree
+--select substr('Developer',3,2)//ve from 3rd position take 2 letters hence ve is shown as result 
+
+--select CustomerName,substr(CustomerName,3,3) as [Applying substring function] from Customers;//this will extract 3 letters from 3rd position in every record present in CustomerName column
+
+
+--select substr('Mindtree',-4); //counting will start from right end side -4 will stop at 4th position from right side , hence it will give all after t including t 
+
+--select CustomerName,substr(CustomerName,-3,3) as [Applying substring function] from Customers;////counting will start from right end side -3 will stop at 3rd position from right side , hence it will give all letters after -3 position including -3 position 
+
+--use the following command to print last letters from every record 
+select CustomerName,substr(CustomerName,-1) from Customers;
+
+
+
+
+
+
+
+#select concat('Mindtree',' ','Developer');
+#select concat("Mindtree"," "," Tester") as "Result After Concatenation = ";
+
+#select CustomerName,Country,concat(CustomerName,Country) as "applying concatenation" from Customers;
+#select FirstName,LastName,concat(FirstName," ",LastName) as "FullName Concatenation" from Employees;
+
+select FirstName,LastName,concat("My full name = ",FirstName," ",LastName) as "FullName concatenation with text added" from Employees;
+
+
+
+
+
+
+
+--insert into Customers values(100,"   Mindtree Developer  ","  Contact Mindtree  ","  Bangalore tech park  "," Bangalore",234,"  India");
+--select * from Customers;
+
+--select length("Mindtree dveeloper");//18
+--select length("  Mindtree  Developer  ");//23
+--select length(trim("  Mindtree  Developer  "));//19 extra spaces are removed leading (starting) , trailing(ending) , spaces in between are present (included counted)
+
+--select * from Customers;
+--select CustomerName,length(CustomerName) as "CustomerName Length",length(trim(CustomerName)) as "CustomerName Trim after length" from Customers;
+--select ContactName,length(ContactName) as "ContactName Length",length(trim(ContactName)) as "ContactName Trim after length" from Customers;
+--select Address,length(Address) as "Address length",length(trim(Address)) as "Address Trim after length" from Customers;
+
+
+--select * from Customers where CustomerID =100;
+--select CustomerName,length(CustomerName) as "CustomerName Length",length(trim(CustomerName)) as "CustomerName Trim after length" from Customers where CustomerID =100;
+--select ContactName,length(ContactName) as "ContactName Length",length(trim(ContactName)) as "ContactName Trim after length" from Customers where CustomerID =100;
+--select Address,length(Address) as "Address length",length(trim(Address)) as "Address Trim after length" from Customers where CustomerID =100;
+
+
+
+
+
+--select 8 as "Printing Value = ";//8
+--select -8 as "Printing Value = ";//-8
+--select abs(10) as "Printing Value = ";//10
+--select abs(-10) as "Printing Value = ";//10
+
+--select * from Products;
+--select ProductName,Price,abs(Price) from Products;
+
+--insert into Products values(78,"TeaBox",20.345,-50,"15 boxes",-56.786);
+--select * from Products where ProductID = 78;
+--select ProductName,SupplierID,abs(SupplierID),CategoryID,abs(CategoryID),Price,abs(Price) from Products where ProductID = 78;
+
+select ProductName,SupplierID,abs(SupplierID) as "SupplierID Absolute function ",
+CategoryID,abs(CategoryID) as "CategoryID Absolute function ",
+Price,abs(Price) as "Price Absolute function " from Products where ProductID = 78;
+
+
+
+
+
+#select mod(12,11) as "Applying Modulues function";
+select ProductName,Price,mod(Price,3) from Products;
+
+
+
+
+
+
+#select greatest(23,45,67,54,21,12,98,56) ;
+#select greatest("Mindtree","Developer","ServiceNow");//applying on text
+
+#select least(23,45,67,54,21,12,98,56);
+#select least("Mindtree","Developer","ServiceNow");//applying on text
+
+
+
+
+
+#select 23.4543456;//23.4543456
+#select truncate(23.4543,3);//23.454 since there 3 is mentioned, hece result yields 3 digits after decimal point  
+#select truncate(23.4543,7)//23.4543000  4 extra 0's will be present in the output 
+
+#select truncate(23456.4543,-2)//23400 since -2 is given 2 digits to the left of the decimal point will be converted to 0's,digits after decimal point will be removed and rest is displayed as it is
+
+#select ProductName,Price,truncate(Price,1) from Products;
+#select ProductName,Price,truncate(Price,-1) from Products;
+#select ProductName,Price,truncate(Price,0) from Products;
+
+
+
+
+
+
+#select power(2,3);//8
+#select power(-2,3)//-8
+#select EmployeeID,power(EmployeeID,3) from Orders;
+
+#select sqrt(16) as "Square Root of 16 = ";
+#select sqrt(21)//4.58257569495584
+select EmployeeID,sqrt(EmployeeID) from Orders;
+
+
+
+
+#select current_date();//2022-01-04
+#select curdate();//2022-01-04
+
+#select current_time();//19:09:02
+#select curtime();//19:11:06
+
+#select now();//2022-01-04 19:11:33
+#select sysdate();//2022-01-04 19:12:53
+
+
+
+
+
+#select "05-01-2022";
+#select year("2022-01-05");//2022
+#select month("2022-01-05");//1
+#select day("2022-01-05");//5
+
+#select monthname("2022-01-05");//January
+#select dayname("2022-01-05");//Wednesday
+
+
+#select OrderDate,monthname(OrderDate) from Orders;
+#select OrderDate,dayname(OrderDate) from Orders;
+
+#select OrderDate,dayname(OrderDate) from Orders where dayname(OrderDate) = "Thursday";
+select OrderDate,dayname(OrderDate) from Orders where monthname(OrderDate) = 'January';
+
+
+
+
+#select avg(CustomerID) from Orders;//46.4265
+#select max(CustomerID) from Orders;//91
+select min(CustomerID),count(CustomerID),sum(CustomerID) from Orders; // 1 	830		38534
+
+
+
+
+
+
+#ProductID column is present in OrderDetails and Products 
+
+#Multi row sub query :-(select * from OrderDetails where Quantity = 1 having ProductID > 30 and ProductID < 50);
+
+# product ID from inner query = 37,31,40,32
+#Select * from Products where ProductID in (select ProductID from OrderDetails where Quantity = 1 having ProductID > 30 and ProductID < 50);
+
+# product ID from inner query = which are not from 37,31,40,32
+#Select * from Products where ProductID  not in (select ProductID from OrderDetails where Quantity = 1 having ProductID > 30 and ProductID < 50);
+
+#displaying all products where productID is less than any of the product ID's 37,31,40,32 
+#Select * from Products where ProductID < any (select ProductID from OrderDetails where Quantity = 1 having ProductID > 30 and ProductID < 50);
+
+#displaying all products where productID is greater than any of the product ID's 37,31,40,32 
+#Select * from Products where ProductID > any (select ProductID from OrderDetails where Quantity = 1 having ProductID > 30 and ProductID < 50);
+
+#displaying all products where productID is less than all of the product ID's 37,31,40,32 --means less than 31
+#Select * from Products where ProductID < all (select ProductID from OrderDetails where Quantity = 1 having ProductID > 30 and ProductID < 50);
+
+#displaying all products where productID is greater than all of the product ID's 37,31,40,32 --means greater than 40
+#Select * from Products where ProductID > all (select ProductID from OrderDetails where Quantity = 1 having ProductID > 30 and ProductID < 50);
+
+
+#Select * from Products where ProductID < any (select ProductID from OrderDetails where Quantity = 1 );
+
+
+Exists :- 
+
+#select CustomerID FROM Customers where CustomerID > 87; 
+#this should not work as inner query don't fetch any records
+#SELECT * FROM Orders where exists (select CustomerID FROM Customers where CustomerID > 91);
+
+#this should not work as inner query will fetch some records
+#SELECT * FROM Orders where exists (select * FROM Customers where CustomerID > 90);
+
+
+
+
+
+
+
+#CategoryID :- Categories, products 
+
+#select ProductName from Products;
+#select CategoryName from Categories;
+
+#select CategoryID,ProductName,(select CategoryName from Categories where Categories.CategoryID = Products.CategoryID) as "Category Name from Categories"from Products
+
+select CategoryID,ProductName as "ProductName from Products table",(select CategoryName from Categories where Categories.CategoryID = Products.CategoryID) as "Category Name from Categories table" from Products order by CategoryID,ProductName asc;
+
+
+
+
+
+
+
+
+#fetch all order ID's having maximum of CustomerID and minimum of Employee ID in Orders table 
+
+#select max(CustomerID) from Orders;
+#select min(EmployeeID) from Orders;
+
+#select * from Orders where CustomerID = (select max(CustomerID) from Orders) and EmployeeID = (select min(EmployeeID) from Orders);
+
+select * from Orders where CustomerID = (select max(CustomerID) from Orders) and EmployeeID = (select min(EmployeeID) from Orders) order by OrderDate ;
+
+
+
+
+
+
+
+#Not null
+create table integrity_table1(ID int not null,Name varchar(15),Location varchar(15));
+
+insert into integrity_table1 values(1,"Name1","Location1");
+insert into integrity_table1 values(1,"Name2","Location2");
+#insert into integrity_table1(Name,Location) values("Name1","Location1");// will throw an error because ID values is not stored for this record as it can't be null
+#insert into integrity_table1(ID,Name) values(3,"Name3");//won't throw an error as ID value is not null
+
+select * from integrity_table1;
+
+
+
+# Unique
+drop table integrity_unique;
+#using unique at column level
+create table integrity_unique(ID int unique, Name varchar(15), Location varchar(15));
+
+insert into integrity_unique values(1,"Name1","Location1");
+insert into integrity_unique values(2,"Name2","Location2");
+#insert into integrity_unique values(1,"Name1","Location1"); //Error :- Will thorw an error as ID contains unqiue values Duplicate entry '1' for ID's are not possible 
+#insert into integrity_unique values(2,"Name2","Location3"); //Error :- Will thorw an error as ID contains unqiue values Duplicate entry '1' for ID's are not possible 
+select * from integrity_unique;
+
+
+#using unqiue at table level 
+#create table integrity_unique1(ID int, Name varchar(15), Location varchar(15),unique(ID,Name));//uniqueness present on 2 columns together
+insert into integrity_unique1 values(1,"Name1","Location1");
+insert into integrity_unique1 values(2,"Name2","Location2");
+insert into integrity_unique1 values(3,"Name2","Location2");
+#insert into integrity_unique1 values(3,"Name2","Location2");//ID can't have duplicate values as it consists of unique values;
+#insert into integrity_unique1 values(2,"Name2","Location2"); // 2 and Name2 together forms a duplicate value , 2 and something  or somethign and 2 won't form duplicate value 
+
+
+
+
+Case :- 
+SELECT ProductName,Price,
+Case
+when Price > 30 then 'Price is greater than 30'
+when Price < 30 then 'Price is lesser than 30'
+when Price = 30 then 'Price is equal to 30'
+End as 'Price lies among (Price < 30,Price > 30, Price = 30)' ,Unit
+
+FROM Products;
+
+
+
+
+
+
+SELECT * FROM Customers
+Order by 
+
+(Case 
+when Country in ('USA','UK') then Country 
+when Country not in ('USA','UK') then City  
+End
+);
+
+saving files here 

@@ -1,0 +1,485 @@
+--Intersect operator 
+
+create table t5(a int);
+
+insert into t5 values(1);
+insert into t5 values(3);
+insert into t5 values(5);
+
+select a from t5;
+
+create table t6(b int);
+
+insert into t6 values(2);
+insert into t6 values(3);
+insert into t6 values(4);
+ 
+select b from t6;
+
+select a from t5 intersect select b from t6; 
+
+
+--Minus Operator
+create table t7(a int);
+
+insert into t7 values(2);
+insert into t7 values(3);
+insert into t7 values(4);
+ 
+select a from t7;
+
+
+create table t9(b9 int);
+
+insert into t9 values(1);
+insert into t9 values(3);
+insert into t9 values(5);
+ 
+select b9 from t9;
+
+
+--select a from t7 minus select b9 from t9;//2,4
+--select b9 from t9 minus select a from t7 ;//1,5
+
+
+
+--Joins 
+create table alias_table1(ID int, firstName varchar(20));
+create table alias_table2(ID int, lastName varchar(20));
+
+insert into alias_table1 values(1,"first1");
+insert into alias_table1 values(2,"first2");
+insert into alias_table1 values(3,"first3");
+insert into alias_table1 values(4,"first4");
+insert into alias_table1 values(5,"first5");
+insert into alias_table1 values(6,"first6");
+insert into alias_table1 values(7,"first7");
+insert into alias_table1 values(8,"first8");
+insert into alias_table1 values(9,"first9");
+insert into alias_table1 values(10,"first10");
+select * from alias_table1;
+
+
+insert into alias_table2 values(1,"last1");
+insert into alias_table2 values(2,"last2");
+insert into alias_table2 values(3,"last3");
+insert into alias_table2 values(4,"last4");
+insert into alias_table2 values(5,"last5");
+insert into alias_table2 values(11,"last11");
+insert into alias_table2 values(12,"last12");
+insert into alias_table2 values(13,"last13");
+insert into alias_table2 values(14,"last14");
+insert into alias_table2 values(15,"last15");
+
+select * from alias_table2;
+
+
+select "Mindtree Developer";
+
+
+
+
+
+101 Video :- 
+
+SQL for Beginners - Oracle SQL (Executing SQL Queries)
+ 
+Practical Demonstration
+Retrieving Records:
+Select * from Countries;
+Select Country_Name from Countries;
+Select Country_ID,Country_Name from Countries;
+
+Describe 
+describe countries;
+
+Where Clause
+Select * from Countries where Region_Id=2;
+
+Order By clause
+Select * from Countries Order by Country_Name ASC;
+Select * from Countries Order by Country_Name DESC;
+Select * from Countries Order by Country_Name;
+
+Arithmetic Operators 
+Select Salary,Salary+10000 from Employees;
+Select Salary,Salary-10000 from Employees;
+Select Salary,Salary*10 from Employees;
+Select Salary,Salary/10 from Employees;
+
+Relational Operators
+Select * from Countries where Region_Id=2;
+Select * from Countries where Region_Id<2;
+Select * from Countries where Region_Id>2;
+Select * from Countries where Region_Id<=2;
+Select * from Countries where Region_Id>=2;
+Select * from Countries where Region_Id<>2;
+
+Logical Operators (and, or, not)
+Select * from Countries where Region_id=2 and Country_Name<>'Canada';
+Select * from Countries where Country_name='Canada' or Region_id=3;
+Select * from Countries where Not region_id=2;
+
+Between Operator
+Select * from Employees where employee_id between 105 and 109;
+Select * from Employees where employee_id not between 105 and 109;
+Select * from Employees where first_name between 'Diana' and 'John' order by first_name ASC;
+
+In Operator:
+Select * from Countries where Country_Name In ('Singapore','India','China');
+Select * from Countries where Country_Name Not In ('Singapore','India','China');
+
+Like operator and Wild Cards:
+Select * from Countries where Country_Name like ('I%');
+Select * from Countries where Country_Name like '_ndia';
+
+Alias Name:
+Select Country_Name as Country from Countries;
+Select Country_Name Country from Countries;
+
+Limiting Records
+Select * from Countries where RowNum <=3;
+
+
+
+
+SQL for Beginners - Part 102 - Oracle SQL Built-in functions
+
+
+SQL for Beginners - Oracle SQL Built-in functions
+
+Select avg(Salary) from Employees;
+Select sum(Salary) from Employees;
+Select max(Salary) from Employees;
+Select min(Salary) from Employees;
+Select count(*) from Employees;
+Select abs(-9) from dual;
+Select Salary,mod(Salary,3) from Employees;
+Select upper(Country_name) from Countries;
+Select lower(Country_name) from Countries;
+Select initcap(Country_name) from Countries;
+Select Country_Name, length(Country_name) from Countries;
+Select * from Countries where length(Country_name)=6;
+Select Country_name, RPAD(Country_Name,30,'Q') from Countries;
+Select Country_name, LPAD(Country_Name,30,'Q') from Countries;
+Select Country_Name,instr(Country_Name,'e') from Countries;
+Select Country_Name,substr(Country_Name,3,4) from Countries;
+Select first_name,last_name,concat(first_name,last_name) from Employees;
+Select first_name,last_name,concat(first_name,last_name) as FullName from Employees;
+Select Country_name,trim('a' from Country_name) from Countries;
+Select trim('a' from 'aruna') from Dual;
+Select Country_name,trim('A' from Country_name) from Countries;
+Select Country_name,LTrim(Country_name,'A') from Countries;
+Select ltrim('aruna','a') from Dual;
+Select Country_name,RTrim(Country_name,'a') from Countries;
+Select rtrim('aruna','a') from Dual;
+Select hire_date,add_months(hire_date,2) from Employees;
+Select hire_date,months_between('20-05-2020',hire_date) from Employees;
+Select sysdate from dual;
+Select hire_date,next_day(hire_date,'Monday') from Employees;
+Select hire_date,last_day(hire_date) from Employees;
+Select hire_date,to_char(hire_date,'DD-MM-YYYY') from Employees;
+Select hire_date,to_char(hire_date,'DD-MON-YYYY') from Employees;
+Select hire_date,to_char(hire_date,'DAY') from Employees;
+Select hire_date,to_char(hire_date,'MONTH') from Employees;
+Select hire_date,to_char(hire_date,'YYYY') from Employees;
+Select * from Employees where to_char(hire_date,'YYYY')='2007';
+Select phone_number,to_number(substr(Phone_number,1,3))+10 from Employees;
+Select to_date('25/November/1985') from Dual;
+
+
+
+
+
+
+
+
+
+SQL for Beginners - Part 103 - Oracle SQL Queries (Part 2)
+
+
+
+Practical Demonstration
+Creating the Table:
+create table empone(id number(5),name varchar(15));
+Select * from empone;
+Inserting the Records into the Table
+insert into empone values(1,'Arun');
+insert into empone values(2,'Varun');
+insert into empone values(3,'Tharun');
+Select * from empone;
+
+insert into empone values(4);//Error
+
+insert into empone(id) values(4);
+insert into empone values(5,null);
+Select * from empone;
+Select * from empone where name Is Null;
+Select * from empone where name Is Not Null;
+
+Update the Records
+update empone set name='Kiran' where id=4;
+
+Rename the table
+rename empone to empA;
+Select * from empone;
+Select * from empA;
+
+Delete the records from the Table
+delete from empA where id=3;
+Select * from empA;
+delete from empA;
+Select * from empA;
+Delete the Table itself
+drop table empA;
+Data types
+
+char
+create table emptwo(letter char);
+insert into emptwo values('a');
+number
+create table empthree(id number);
+insert into empthree values(123456789);
+Select * from empthree;
+create table empfour(id number(5));
+insert into empfour values(123456789);
+Select * from empfour;
+
+varchar
+create table empfive(name varchar(5));
+insert into empfive values('Arun');
+Select * from empfive;
+
+date
+create table empsix(hire_date date);
+insert into empsix values('21-05-2020');
+Select * from empsix;
+
+Check constraint
+create table empseven(id number,name varchar(15),country varchar(15) check(country <> 'Ireland'));
+insert into empseven values(1,'Arun','India');
+insert into empseven values(2,'Varun','Ireland');
+Select * from empseven;
+
+
+
+
+
+
+
+
+SQL for Beginners - Part 104 - Oracle SQL Queries (Part 3)
+
+
+
+Practical Demonstration
+Alter Statement (add, modify, rename column and drop column)
+create table emp1(id number,name varchar(15));
+Select * from emp1;
+alter table emp1 add country varchar(15);
+Select * from emp1;
+describe emp1;
+
+alter table emp1 modify name varchar(20);
+describe emp1;
+alter table emp1 rename column country to location;
+describe emp1;
+alter table emp1 drop column location;
+describe emp1;
+Single Line and Multi Line Comments
+-- Create a new table with emp1 name
+create table emp1(id number,name varchar(15));
+Select * from emp1;
+/* Alter the table by doing the below
+   add a new column at the end of the existing columns in the table
+   modify the data type or size of the data type for a particular column
+   rename the name of the column to a different name
+   delete the column */
+alter table emp1 add city varchar(15);
+Select * from emp1;
+describe emp1;
+alter table emp1 modify name varchar(20);
+describe emp1;
+alter table emp1 rename column country to location;
+describe emp1;
+alter table emp1 drop column location;
+describe emp1;
+
+Group By Clause
+Select * from Countries;
+Select Count(*) from Countries;
+Select Count(*) from Countries where Group By region_id;
+Select region_id, count(*) from Countries where Group By region_id;
+Having Clause
+Select region_id,count(*) from Countries group by region_id having count(*)>5;
+
+
+
+
+
+
+
+
+SQL for Beginners - Part 105 - Oracle SQL Queries (Part 4)
+
+
+
+Practical Demonstration
+Set Operators
+We can retrieve the data from different tables at a time using the Set Operators
+Union (All eliminating duplicates)
+
+create table empX(id number);
+insert into empX values(1);
+insert into empX values(3);
+insert into empX values(5);
+Select * from empX;
+
+create table empY(id number);
+insert into empY values(2);
+insert into empY values(3);
+insert into empY values(4);
+Select * from empY;
+Select * from empX union Select * from empY;
+
+Union All (All and won't eliminate duplicates)
+Select * from empX union all Select * from empY;
+
+Intersect (Common)
+Select * from empX intersect Select * from empY;
+Minus  (Only the table records which are not there in other table
+Select * from empX minus Select * from empY;
+
+Tables and Aliases
+Select one.id,one.name,two.country
+from empdetailsone one,empdetailstwo two
+where one.id=two.id;
+
+Joins
+The purpose of Joins is to Join two tables for retrieving the records from two tables
+create table empxone(id number,firstname varchar(15));
+insert into empxone values(1,'Arun');
+insert into empxone values(2,'Varun');
+insert into empxone values(4,'Tharun');
+Select * from empxone;
+create table empxtwo(id number,lastname varchar(15));
+insert into empxtwo values(1,'Motoori');
+insert into empxtwo values(4,'Kumar');
+insert into empxtwo values(5,'Rathod');
+Select * from empxtwo;
+Inner Join (Common records)
+Select * from empxone
+
+inner join empxtwo
+on empxone.id=empxtwo.id;
+left outer Join (Records in left table will be given importance and the right table records will be adjusted)
+Select * from empxone
+
+left outer join empxtwo
+on empxone.id=empxtwo.id;
+
+right outer join
+Select * from empxone
+
+right outer join empxtwo
+on empxone.id=empxtwo.id;
+full outer join (Both the tables are given importance while joining)
+
+Select * from empxone
+
+full outer join empxtwo
+on empxone.id=empxtwo.id;
+Self Join (Table joining with itself)
+create table empxthree(id number,firstname varchar(15),lastname varchar(15),depid number);
+Select *
+from empxthree o,empxthree t
+where o.id=t.depid;
+
+
+
+
+
+
+SQL for Beginners - Part 106 - Oracle SQL Queries (Part 5)
+
+
+Sub Query
+Sub Query is a query inside another query
+Outer Query
+Inner Query (Sub Query)
+Practical Demonstrations
+Retrieve all the employees, who are from the same department of Bruce
+Select department_id from Employees where first_name='Bruce';
+Select * from Employees where department_id = (Select department_id from Employees where first_name='Bruce');
+
+Types of Sub Queries
+Single Row Sub Query
+Multi Row Sub Query
+Multi-Row Sub Query and different Operators
+We have to use in,any,all and exits operators
+In Operator
+Select * from employees where first_name='Steven';
+Select department_id from employees where first_name='Steven';
+Select * from employees where department_id = (Select department_id from employees where first_name='Steven');
+Error
+
+Select * from employees where department_id In (Select department_id from employees where first_name='Steven');
+
+Any Operator
+Select Salary from employees where department_id=60;
+Select * from employees where Salary < (Select Salary from employees where department_id=60);
+Error
+Select * from employees where Salary < any (Select Salary from employees where department_id=60);
+
+All Operator
+Select * from employees where Salary < all (Select Salary from employees where department_id=60);
+
+Exists Operator
+Select * from employees where exists (Select * from employees where department_id=60);
+Select * from employees where exists (Select * from employees where department_id=112);
+
+Integrity Constraints
+Conditions we can apply on the Table Column Data
+Not Null
+Create table QAFoxOne(id number not null,name varchar(15));
+insert into qafoxone values(1,'Arun');
+insert into qafoxone(name) values('Varun');
+insert into qafoxone values(null,'Tharun');
+
+Unique
+create table QAFoxTwo(id number unique,name varchar(15));
+insert into qafoxtwo values(1,'Arun');
+insert into qafoxtwo values(1,'Varun');
+
+Primary Key
+create table qafoxthree(id number primary key,name varchar(15));
+insert into qafoxthree values(1,'Arun');
+insert into qafoxthree(name) values('Varun');
+insert into qafoxthree values(null,'Tharun');
+insert into qafoxthree values(1,'Kiran');
+Foreign Key
+create table empp(id number primary key,name varchar(15));
+insert into empp values(1,'Arun');
+insert into empp values(2,'Varun');
+insert into empp values(3,'Tharun');
+Select * from empp;
+create table empsal(id number,salary number,constraint empsal_id_rel foreign key(id) references empp(id));
+insert into empsal values(1,1400000);
+insert into empsal values(5,700000);//Error
+insert into empsal values(2,900000);
+insert into empsal values(3,1100000);
+Select * from empsal;
+delete from empp where id=2;//Error
+delete from empsal where id=2;
+delete from empp where id=2;
+
+
+Check
+create table qafoxfour(id number,name varchar(15),country varchar(15) check(country = 'USA'));
+insert into qafoxfour values(1,'Arun','India');
+insert into qafoxfour values(2,'Varun','USA');
+default
+create table qafoxfive(id number,name varchar(15),contry varchar(15) default 'India');
+insert into qafoxfive(id,name) values(1,'Arun');
+Select * from qafoxfive;
+insert into qafoxfive values(2,'Varun','USA');
